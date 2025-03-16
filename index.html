@@ -231,126 +231,6 @@
       margin: 0;
     }
 
-    /* Pricing Section */
-    .pricing {
-      padding: 80px 20px;
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(10px);
-      text-align: center;
-      border-radius: 20px;
-      margin: 40px 20px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    }
-
-    .pricing h2 {
-      font-size: 2.5rem;
-      margin-bottom: 40px;
-      background: linear-gradient(90deg, #8e44ad, #3498db);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .pricing-cards {
-      display: flex;
-      justify-content: space-around;
-      flex-wrap: wrap;
-    }
-
-    .pricing-card {
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(10px);
-      padding: 30px;
-      border-radius: 20px;
-      width: 30%;
-      margin: 10px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .pricing-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-    }
-
-    .pricing-card h3 {
-      font-size: 1.5rem;
-      margin-bottom: 15px;
-      color: #fff;
-    }
-
-    .pricing-card p {
-      font-size: 1rem;
-      color: #ecf0f1;
-    }
-
-    .pricing-card .price {
-      font-size: 2rem;
-      font-weight: 700;
-      color: #3498db;
-      margin: 20px 0;
-    }
-
-    .pricing-card ul {
-      list-style: none;
-      padding: 0;
-      margin: 20px 0;
-    }
-
-    .pricing-card ul li {
-      font-size: 1rem;
-      color: #ecf0f1;
-      margin: 10px 0;
-    }
-
-    .pricing-card button {
-      padding: 10px 20px;
-      background: linear-gradient(90deg, #3498db, #8e44ad);
-      color: #fff;
-      border: none;
-      border-radius: 50px;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .pricing-card button:hover {
-      transform: scale(1.05);
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-    }
-
-    /* Client Logos Section */
-    .clients {
-      padding: 80px 20px;
-      background: rgba(44, 62, 80, 0.8);
-      backdrop-filter: blur(10px);
-      text-align: center;
-    }
-
-    .clients h2 {
-      font-size: 2.5rem;
-      margin-bottom: 40px;
-      background: linear-gradient(90deg, #8e44ad, #3498db);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .client-logos {
-      display: flex;
-      justify-content: space-around;
-      flex-wrap: wrap;
-    }
-
-    .client-logos img {
-      width: 150px;
-      margin: 20px;
-      filter: grayscale(100%);
-      transition: filter 0.3s ease;
-    }
-
-    .client-logos img:hover {
-      filter: grayscale(0%);
-    }
-
     /* Stats Section */
     .stats {
       padding: 80px 20px;
@@ -452,58 +332,6 @@
       color: #ecf0f1;
     }
 
-    /* Newsletter Section */
-    .newsletter {
-      padding: 80px 20px;
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(10px);
-      text-align: center;
-      border-radius: 20px;
-      margin: 40px 20px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    }
-
-    .newsletter h2 {
-      font-size: 2.5rem;
-      margin-bottom: 40px;
-      background: linear-gradient(90deg, #8e44ad, #3498db);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .newsletter form {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-
-    .newsletter input {
-      padding: 15px;
-      border: 2px solid #ddd;
-      border-radius: 50px;
-      font-size: 1rem;
-      margin-right: 10px;
-      width: 300px;
-      max-width: 100%;
-    }
-
-    .newsletter button {
-      padding: 15px 30px;
-      background: linear-gradient(90deg, #3498db, #8e44ad);
-      color: #fff;
-      border: none;
-      border-radius: 50px;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .newsletter button:hover {
-      transform: scale(1.05);
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-    }
-
     /* Footer */
     footer {
       background: rgba(44, 62, 80, 0.8);
@@ -532,7 +360,7 @@
 
     /* Responsive Design */
     @media (max-width: 768px) {
-      .feature-card, .testimonial-card, .pricing-card, .stats-card, .faq-card {
+      .feature-card, .testimonial-card, .stats-card, .faq-card {
         width: 45%;
       }
     }
@@ -546,7 +374,7 @@
         font-size: 2rem;
       }
 
-      .feature-card, .testimonial-card, .pricing-card, .stats-card, .faq-card {
+      .feature-card, .testimonial-card, .stats-card, .faq-card {
         width: 100%;
       }
     }
@@ -618,54 +446,6 @@
     </div>
   </section>
 
-  <!-- Pricing Section -->
-  <section class="pricing">
-    <h2>Pricing Plans</h2>
-    <div class="pricing-cards">
-      <div class="pricing-card">
-        <h3>Basic</h3>
-        <p class="price">$10/month</p>
-        <ul>
-          <li>AI-Powered Pricing</li>
-          <li>Custom Quotes</li>
-          <li>Email Support</li>
-        </ul>
-        <button>Get Started</button>
-      </div>
-      <div class="pricing-card">
-        <h3>Pro</h3>
-        <p class="price">$25/month</p>
-        <ul>
-          <li>Everything in Basic</li>
-          <li>Advanced Analytics</li>
-          <li>Priority Support</li>
-        </ul>
-        <button>Get Started</button>
-      </div>
-      <div class="pricing-card">
-        <h3>Enterprise</h3>
-        <p class="price">$50/month</p>
-        <ul>
-          <li>Everything in Pro</li>
-          <li>Dedicated Account Manager</li>
-          <li>Custom Integrations</li>
-        </ul>
-        <button>Get Started</button>
-      </div>
-    </div>
-  </section>
-
-  <!-- Client Logos Section -->
-  <section class="clients">
-    <h2>Trusted By</h2>
-    <div class="client-logos">
-      <img src="https://via.placeholder.com/150" alt="Client 1">
-      <img src="https://via.placeholder.com/150" alt="Client 2">
-      <img src="https://via.placeholder.com/150" alt="Client 3">
-      <img src="https://via.placeholder.com/150" alt="Client 4">
-    </div>
-  </section>
-
   <!-- Stats Section -->
   <section class="stats">
     <h2>Our Impact</h2>
@@ -702,15 +482,6 @@
         <p>Absolutely! You can cancel your subscription at any time with no hidden fees.</p>
       </div>
     </div>
-  </section>
-
-  <!-- Newsletter Section -->
-  <section class="newsletter">
-    <h2>Subscribe to Our Newsletter</h2>
-    <form>
-      <input type="email" placeholder="Enter your email" required>
-      <button type="submit">Subscribe</button>
-    </form>
   </section>
 
   <!-- Footer -->
