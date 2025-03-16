@@ -3,121 +3,234 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="AI-powered pricing and quote calculator for freelancers. Calculate your freelance rates with our AI-Powered pricing calculator.Get accurate quotes based on industry,experience,location and more.Try it now!">
-  <meta name="keywords" content="freelance pricing,pricing calculator,freelance pricing tool, quote calculator, AI pricing tool, freelancer rates, pricing guide">
-  <meta name="DeepSeek" content="DeepSeek Inc.">
-  <title>Freelance Pricing & Quote Calculator</title>
+  <meta name="description" content="AI-powered pricing and quote calculator for freelancers. Calculate your rates based on product, industry, experience, project complexity, and location.">
+  <meta name="keywords" content="freelance pricing, quote calculator, AI pricing tool, freelancer rates, pricing guide">
+  <meta name="author" content="Your Name or Company">
+  <title>Freelance Pricing & Quote Calculator - Pricify</title>
+  <!-- SEO Meta Tags -->
+  <meta property="og:title" content="Freelance Pricing & Quote Calculator - Pricify">
+  <meta property="og:description" content="AI-powered pricing and quote calculator for freelancers. Calculate your rates based on product, industry, experience, project complexity, and location.">
+  <meta property="og:image" content="https://example.com/pricify-thumbnail.jpg">
+  <meta property="og:url" content="https://example.com">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://example.com">
+  <!-- Google AdSense Script -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_AD_UNIT_ID" crossorigin="anonymous"></script>
   <style>
     /* Global Styles */
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
-      color: #333;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #1f1c2c, #928dab);
+      color: #fff;
       margin: 0;
       padding: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
+      line-height: 1.6;
+      overflow-x: hidden;
     }
+
+    /* Container */
     .container {
       max-width: 800px;
-      width: 100%;
-      margin: 20px;
+      width: 90%;
+      margin: 40px auto;
       padding: 30px;
-      background: #fff;
-      border-radius: 15px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
     }
+
+    /* Header */
     h1 {
       text-align: center;
-      color: #2c3e50;
       font-size: 2.5rem;
       margin-bottom: 20px;
+      background: linear-gradient(90deg, #8e44ad, #3498db);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: fadeInUp 1s ease;
     }
+
+    /* Ad Spaces */
+    .ad-space {
+      text-align: center;
+      margin: 20px 0;
+      padding: 10px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .ad-space iframe {
+      display: inline-block;
+      margin: 0 auto;
+    }
+
+    /* Form Styles */
     label {
       display: block;
       margin: 15px 0 5px;
       font-weight: 600;
-      color: #34495e;
+      color: #ecf0f1;
+      font-size: 1.1rem;
     }
+
     input, select {
       width: 100%;
       padding: 12px;
       margin-bottom: 20px;
-      border: 2px solid #ddd;
-      border-radius: 8px;
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
       font-size: 16px;
-      transition: border-color 0.3s ease;
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
     }
+
     input:focus, select:focus {
       border-color: #3498db;
       outline: none;
+      box-shadow: 0 0 10px rgba(52, 152, 219, 0.5);
     }
+
     button {
       width: 100%;
       padding: 15px;
-      background-color: #3498db;
+      background: linear-gradient(90deg, #8e44ad, #3498db);
       color: #fff;
       border: none;
-      border-radius: 8px;
+      border-radius: 10px;
       font-size: 18px;
       font-weight: 600;
       cursor: pointer;
-      transition: background-color 0.3s ease;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
+
     button:hover {
-      background-color: #2980b9;
+      transform: scale(1.05);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
     }
+
+    /* Result Section */
     .result {
       margin-top: 25px;
       padding: 20px;
-      background-color: #ecf0f1;
+      background: rgba(255, 255, 255, 0.1);
       border-radius: 10px;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    }
-    .ad-container {
-      text-align: center;
-      margin: 20px 0;
-    }
-    .ad-container iframe {
-      display: inline-block;
-      margin: 0 auto;
-    }
-    footer {
-      text-align: center;
-      margin-top: 30px;
-      padding: 15px;
-      background-color: #2c3e50;
-      color: #fff;
-      border-radius: 10px;
-    }
-    @media (max-width: 600px) {
-      .container {
-        padding: 20px;
-      }
-      h1 {
-        font-size: 2rem;
-      }
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      animation: fadeInUp 1s ease;
     }
 
-    /* Custom Styles for Manual Inputs */
+    .result h2 {
+      font-size: 1.8rem;
+      margin-bottom: 15px;
+      color: #fff;
+    }
+
+    .result p {
+      font-size: 1rem;
+      color: #ecf0f1;
+      margin-bottom: 10px;
+    }
+
+    .result button {
+      margin-top: 15px;
+    }
+
+    /* Quote Details */
+    #quoteDetails {
+      margin-top: 20px;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #quoteDetails h2 {
+      font-size: 1.8rem;
+      margin-bottom: 15px;
+      color: #fff;
+    }
+
+    #quoteDetails p {
+      font-size: 1rem;
+      color: #ecf0f1;
+      margin-bottom: 10px;
+    }
+
+    #quoteDetails ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    #quoteDetails ul li {
+      font-size: 1rem;
+      color: #ecf0f1;
+      margin-bottom: 10px;
+    }
+
+    /* Manual Inputs */
     .manual-input-container {
       display: none;
       margin-top: 10px;
     }
+
     .manual-input-container input {
       margin-bottom: 10px;
     }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      margin-top: 30px;
+      padding: 15px;
+      background: rgba(44, 62, 80, 0.8);
+      backdrop-filter: blur(10px);
+      color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    footer p {
+      margin: 0;
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 2rem;
+      }
+
+      .container {
+        padding: 20px;
+      }
+
+      input, select, button {
+        font-size: 14px;
+      }
+    }
   </style>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   <!-- Include jsPDF library -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body>
   <div class="container">
-    <h1>Freelance Pricing & Quote Calculator</h1>
-    <div class="ad-container">
-      <!-- Google AdSense Ad Unit -->
+    <!-- Ad Space 1 (Top) -->
+    <div class="ad-space">
       <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-app-pub-8930719337345199/3962800895" crossorigin="anonymous"></script>
       <ins class="adsbygoogle"
            style="display:block"
@@ -129,6 +242,8 @@
            (adsbygoogle = window.adsbygoogle || []).push({});
       </script>
     </div>
+
+    <h1>Freelance Pricing & Quote Calculator</h1>
 
     <form id="pricingForm">
       <!-- Product/Service -->
@@ -266,8 +381,8 @@
       </div>
     </div>
 
-    <div class="ad-container">
-      <!-- Google AdSense Ad Unit -->
+    <!-- Ad Space 2 (Bottom) -->
+    <div class="ad-space">
       <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-app-pub-8930719337345199/6581520529" crossorigin="anonymous"></script>
       <ins class="adsbygoogle"
            style="display:block"
