@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="AI-powered pricing and quote calculator for freelancers. Calculate your rates based on product, industry, experience, project complexity, and location.">
+  <meta name="keywords" content="freelance pricing, quote calculator, AI pricing tool, freelancer rates, pricing guide">
+  <meta name="author" content="Your Name or Company">
+  <title>Freelance Pricing & Quote Calculator</title>
+  <style>
+    /* Global Styles */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+      color: #333;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    .container {
+      max-width: 800px;
+      width: 100%;
+      margin: 20px;
+      padding: 30px;
+      background: #fff;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      text-align: center;
+      color: #2c3e50;
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      margin: 15px 0 5px;
+      font-weight: 600;
+      color: #34495e;
+    }
+    input, select {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 20px;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      font-size: 16px;
+      transition: border-color 0.3s ease;
+    }
+    input:focus, select:focus {
+      border-color: #3498db;
+      outline: none;
+    }
+    button {
+      width: 100%;
+      padding: 15px;
+      background-color: #3498db;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 18px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #2980b9;
+    }
+    .result {
+      margin-top: 25px;
+      padding: 20px;
+      background-color: #ecf0f1;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+    .ad-container {
+      text-align: center;
+      margin: 20px 0;
+    }
+    .ad-container iframe {
+      display: inline-block;
+      margin: 0 auto;
+    }
+    footer {
+      text-align: center;
+      margin-top: 30px;
+      padding: 15px;
+      background-color: #2c3e50;
+      color: #fff;
+      border-radius: 10px;
+    }
+    @media (max-width: 600px) {
+      .container {
+        padding: 20px;
+      }
+      h1 {
+        font-size: 2rem;
+      }
+    }
+
+    /* Custom Styles for Manual Inputs */
+    .manual-input-container {
+      display: none;
+      margin-top: 10px;
+    }
+    .manual-input-container input {
+      margin-bottom: 10px;
+    }
+  </style>
+  <!-- Include jsPDF library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+  <div class="container">
+    <h1>Freelance Pricing & Quote Calculator</h1>
+    <div class="ad-container">
+      <!-- Google AdSense Ad Unit -->
+      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_AD_UNIT_ID" crossorigin="anonymous"></script>
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-YOUR_AD_UNIT_ID"
+           data-ad-slot="1234567890"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>
+           (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+    </div>
+
+    <form id="pricingForm">
+      <!-- Product/Service -->
+      <label for="product">Product/Service:</label>
+      <select id="product" name="product" onchange="toggleManualInput('product')">
+        <option value="websiteDesign">Website Design</option>
+        <option value="blogWriting">Blog Writing</option>
+        <option value="logoDesign">Logo Design</option>
+        <option value="socialMedia">Social Media Management</option>
+        <option value="seo">SEO Optimization</option>
+        <option value="videoEditing">Video Editing</option>
+        <option value="appDevelopment">App Development</option>
+        <option value="copywriting">Copywriting</option>
+        <option value="graphicDesign">Graphic Design</option>
+        <option value="other">Other (Enter Manually)</option>
+      </select>
+
+      <div id="manualProductContainer" class="manual-input-container">
+        <label for="manualProduct">Enter Product/Service:</label>
+        <input type="text" id="manualProduct" name="manualProduct" placeholder="Enter your product or service">
+      </div>
+
+      <!-- Industry/Niche -->
+      <label for="industry">Industry/Niche:</label>
+      <select id="industry" name="industry" onchange="toggleManualInput('industry')">
+        <option value="writing">Writing</option>
+        <option value="design">Design</option>
+        <option value="development">Development</option>
+        <option value="marketing">Marketing</option>
+        <option value="consulting">Consulting</option>
+        <option value="other">Other (Enter Manually)</option>
+      </select>
+
+      <div id="manualIndustryContainer" class="manual-input-container">
+        <label for="manualIndustry">Enter Industry/Niche:</label>
+        <input type="text" id="manualIndustry" name="manualIndustry" placeholder="Enter your industry or niche">
+      </div>
+
+      <!-- Location -->
+      <label for="location">Location:</label>
+      <select id="location" name="location" onchange="toggleManualInput('location')">
+        <option value="usa">USA</option>
+        <option value="europe">Europe</option>
+        <option value="asia">Asia</option>
+        <option value="other">Other (Enter Manually)</option>
+      </select>
+
+      <div id="manualLocationContainer" class="manual-input-container">
+        <label for="manualLocation">Enter Location:</label>
+        <input type="text" id="manualLocation" name="manualLocation" placeholder="Enter your location">
+      </div>
+
+      <!-- Experience Level -->
+      <label for="experience">Experience Level:</label>
+      <select id="experience" name="experience">
+        <option value="beginner">Beginner</option>
+        <option value="intermediate">Intermediate</option>
+        <option value="expert">Expert</option>
+      </select>
+
+      <!-- Project Complexity -->
+      <label for="complexity">Project Complexity:</label>
+      <select id="complexity" name="complexity">
+        <option value="simple">Simple</option>
+        <option value="moderate">Moderate</option>
+        <option value="complex">Complex</option>
+      </select>
+
+      <!-- Timeframe -->
+      <label for="timeframe">Timeframe:</label>
+      <select id="timeframe" name="timeframe">
+        <option value="standard">Standard</option>
+        <option value="rush">Rush</option>
+      </select>
+
+      <!-- Currency -->
+      <label for="currency">Currency:</label>
+      <select id="currency" name="currency" onchange="toggleManualInput('currency')">
+        <option value="USD">USD</option>
+        <option value="EUR">EUR</option>
+        <option value="INR">INR</option>
+        <option value="GBP">GBP</option>
+        <option value="other">Other (Enter Manually)</option>
+      </select>
+
+      <div id="manualCurrencyContainer" class="manual-input-container">
+        <label for="manualCurrency">Enter Currency Code:</label>
+        <input type="text" id="manualCurrency" name="manualCurrency" placeholder="Enter currency code (e.g., CAD, AUD)">
+      </div>
+
+      <!-- Skills -->
+      <label for="skills">Skills:</label>
+      <select id="skills" name="skills" multiple onchange="toggleManualInput('skills')">
+        <option value="react">React.js</option>
+        <option value="python">Python</option>
+        <option value="graphicDesign">Graphic Design</option>
+        <option value="seo">SEO</option>
+        <option value="other">Other (Enter Manually)</option>
+      </select>
+
+      <div id="manualSkillsContainer" class="manual-input-container">
+        <label for="manualSkills">Enter Skills (comma-separated):</label>
+        <input type="text" id="manualSkills" name="manualSkills" placeholder="Enter skills (e.g., JavaScript, UI/UX)">
+      </div>
+
+      <!-- Client Budget -->
+      <label for="clientBudget">Client Budget:</label>
+      <input type="number" id="clientBudget" name="clientBudget" placeholder="Enter client's budget">
+
+      <!-- Project Duration -->
+      <label for="projectDuration">Project Duration (hours):</label>
+      <input type="number" id="projectDuration" name="projectDuration" placeholder="Enter project duration">
+
+      <button type="button" onclick="calculateRate()">Calculate My Rate</button>
+    </form>
+
+    <div class="result" id="result" style="display: none;">
+      <h2>Your Recommended Rate:</h2>
+      <p id="rateRange"></p>
+      <p id="rateExplanation"></p>
+      <p id="clientBudgetComparison"></p>
+      <p id="projectCost"></p>
+      <button onclick="generateQuote()">Generate Quote</button>
+      <div id="quoteDetails" style="display: none; margin-top: 20px;">
+        <h2>Quote Details</h2>
+        <p><strong>Product/Service:</strong> <span id="quoteProduct"></span></p>
+        <p><strong>Industry/Niche:</strong> <span id="quoteIndustry"></span></p>
+        <p><strong>Experience Level:</strong> <span id="quoteExperience"></span></p>
+        <p><strong>Project Complexity:</strong> <span id="quoteComplexity"></span></p>
+        <p><strong>Location:</strong> <span id="quoteLocation"></span></p>
+        <p><strong>Timeframe:</strong> <span id="quoteTimeframe"></span></p>
+        <p><strong>Recommended Rate:</strong> <span id="quoteRate"></span></p>
+        <h3>Terms and Conditions:</h3>
+        <ul id="quoteTerms"></ul>
+      </div>
+    </div>
+
+    <div class="ad-container">
+      <!-- Google AdSense Ad Unit -->
+      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_AD_UNIT_ID" crossorigin="anonymous"></script>
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-YOUR_AD_UNIT_ID"
+           data-ad-slot="1234567890"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>
+           (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2023 Freelance Pricing Calculator. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Base rates for products/services
+    const productRates = {
+      websiteDesign: { beginner: 50, intermediate: 100, expert: 150 },
+      blogWriting: { beginner: 20, intermediate: 40, expert: 60 },
+      logoDesign: { beginner: 30, intermediate: 60, expert: 90 },
+      socialMedia: { beginner: 25, intermediate: 50, expert: 75 },
+      seo: { beginner: 40, intermediate: 80, expert: 120 },
+      videoEditing: { beginner: 35, intermediate: 70, expert: 105 },
+      appDevelopment: { beginner: 60, intermediate: 120, expert: 180 },
+      copywriting: { beginner: 25, intermediate: 50, expert: 75 },
+      graphicDesign: { beginner: 30, intermediate: 60, expert: 90 },
+      other: { beginner: 20, intermediate: 40, expert: 60 }, // Default for manual input
+    };
+
+    // Industry adjustments
+    const industryAdjustments = {
+      writing: -0.1, // -10%
+      design: 0, // No adjustment
+      development: 0.2, // +20%
+      marketing: 0.1, // +10%
+      consulting: 0.15, // +15%
+      other: 0, // Default for manual input
+    };
+
+    // Location adjustments
+    const locationAdjustments = {
+      usa: 0.3, // +30%
+      europe: 0.2, // +20%
+      asia: -0.2, // -20%
+      other: 0, // Default for manual input
+    };
+
+    // Skill adjustments
+    const skillAdjustments = {
+      react: 1.2, // +20%
+      python: 1.15, // +15%
+      graphicDesign: 1.1, // +10%
+      seo: 1.05, // +5%
+    };
+
+    // Terms and conditions templates
+    const termsTemplates = {
+      writing: {
+        usa: {
+          simple: [
+            "Payment due within 30 days of invoice date.",
+            "One round of revisions included.",
+            "Additional revisions billed at $25/hour.",
+          ],
+          moderate: [
+            "Payment due within 30 days of invoice date.",
+            "Two rounds of revisions included.",
+            "Additional revisions billed at $30/hour.",
+          ],
+          complex: [
+            "Payment due within 30 days of invoice date.",
+            "Three rounds of revisions included.",
+            "Additional revisions billed at $35/hour.",
+          ],
+        },
+        europe: {
+          simple: [
+            "Payment due within 14 days of invoice date.",
+            "One round of revisions included.",
+            "Additional revisions billed at €20/hour.",
+          ],
+          moderate: [
+            "Payment due within 14 days of invoice date.",
+            "Two rounds of revisions included.",
+            "Additional revisions billed at €25/hour.",
+          ],
+          complex: [
+            "Payment due within 14 days of invoice date.",
+            "Three rounds of revisions included.",
+            "Additional revisions billed at €30/hour.",
+          ],
+        },
+        asia: {
+          simple: [
+            "Payment due within 7 days of invoice date.",
+            "One round of revisions included.",
+            "Additional revisions billed at $15/hour.",
+          ],
+          moderate: [
+            "Payment due within 7 days of invoice date.",
+            "Two rounds of revisions included.",
+            "Additional revisions billed at $20/hour.",
+          ],
+          complex: [
+            "Payment due within 7 days of invoice date.",
+            "Three rounds of revisions included.",
+            "Additional revisions billed at $25/hour.",
+          ],
+        },
+        other: {
+          simple: [
+            "Payment due within 30 days of invoice date.",
+            "One round of revisions included.",
+            "Additional revisions billed at $20/hour.",
+          ],
+          moderate: [
+            "Payment due within 30 days of invoice date.",
+            "Two rounds of revisions included.",
+            "Additional revisions billed at $25/hour.",
+          ],
+          complex: [
+            "Payment due within 30 days of invoice date.",
+            "Three rounds of revisions included.",
+            "Additional revisions billed at $30/hour.",
+          ],
+        },
+      },
+      design: {
+        usa: {
+          simple: [
+            "Payment due within 30 days of invoice date.",
+            "One round of revisions included.",
+            "Additional revisions billed at $40/hour.",
+          ],
+          moderate: [
+            "Payment due within 30 days of invoice date.",
+            "Two rounds of revisions included.",
+            "Additional revisions billed at $50/hour.",
+          ],
+          complex: [
+            "Payment due within 30 days of invoice date.",
+            "Three rounds of revisions included.",
+            "Additional revisions billed at $60/hour.",
+          ],
+        },
+        europe: {
+          simple: [
+            "Payment due within 14 days of invoice date.",
+            "One round of revisions included.",
+            "Additional revisions billed at €35/hour.",
+          ],
+          moderate: [
+            "Payment due within 14 days of invoice date.",
+            "Two rounds of revisions included.",
+            "Additional revisions billed at €45/hour.",
+          ],
+          complex: [
+            "Payment due within 14 days of invoice date.",
+            "Three rounds of revisions included.",
+            "Additional revisions billed at €55/hour.",
+          ],
+        },
+        asia: {
+          simple: [
+            "Payment due within 7 days of invoice date.",
+            "One round of revisions included.",
+            "Additional revisions billed at $25/hour.",
+          ],
+          moderate: [
+            "Payment due within 7 days of invoice date.",
+            "Two rounds of revisions included.",
+            "Additional revisions billed at $35/hour.",
+          ],
+          complex: [
+            "Payment due within 7 days of invoice date.",
+            "Three rounds of revisions included.",
+            "Additional revisions billed at $45/hour.",
+          ],
+        },
+        other: {
+          simple: [
+            "Payment due within 30 days of invoice date.",
+            "One round of revisions included.",
+            "Additional revisions billed at $30/hour.",
+          ],
+          moderate: [
+            "Payment due within 30 days of invoice date.",
+            "Two rounds of revisions included.",
+            "Additional revisions billed at $40/hour.",
+          ],
+          complex: [
+            "Payment due within 30 days of invoice date.",
+            "Three rounds of revisions included.",
+            "Additional revisions billed at $50/hour.",
+          ],
+        },
+      },
+      // Add more industries as needed...
+    };
+
+    // Fetch currency rates
+    async function fetchCurrencyRates() {
+      const apiUrl = `https://api.exchangerate-api.com/v4/latest/USD`;
+      try {
+        const response = await fetch(apiUrl);
+        const data = await response.json();
+        return data.rates;
+      } catch (error) {
+        console.error("Error fetching currency rates:", error);
+        return null;
+      }
+    }
+
+    // Fetch cost of living data
+    async function fetchCostOfLiving(location) {
+      const apiUrl = `https://api.numbeo.com/api/cost_of_living?api_key=YOUR_API_KEY&query=${location}`;
+      try {
+        const response = await fetch(apiUrl);
+        const data = await response.json();
+        return data;
+      } catch (error) {
+        console.error("Error fetching cost of living data:", error);
+        return null;
+      }
+    }
+
+    // Toggle manual input fields
+    function toggleManualInput(field) {
+      const value = document.getElementById(field).value;
+      const container = document.getElementById(`manual${field.charAt(0).toUpperCase() + field.slice(1)}Container`);
+      if (value === 'other') {
+        container.style.display = 'block';
+      } else {
+        container.style.display = 'none';
+      }
+    }
+
+    async function calculateRate() {
+      // Get user inputs
+      const product = document.getElementById('product').value;
+      const manualProduct = document.getElementById('manualProduct').value;
+      const industry = document.getElementById('industry').value;
+      const manualIndustry = document.getElementById('manualIndustry').value;
+      const location = document.getElementById('location').value;
+      const manualLocation = document.getElementById('manualLocation').value;
+      const experience = document.getElementById('experience').value;
+      const complexity = document.getElementById('complexity').value;
+      const timeframe = document.getElementById('timeframe').value;
+      const currency = document.getElementById('currency').value;
+      const manualCurrency = document.getElementById('manualCurrency').value;
+      const skills = Array.from(document.getElementById('skills').selectedOptions).map(option => option.value);
+      const manualSkills = document.getElementById('manualSkills').value;
+      const clientBudget = parseFloat(document.getElementById('clientBudget').value);
+      const projectDuration = parseFloat(document.getElementById('projectDuration').value);
+
+      // Use manual inputs if "Other" is selected
+      const selectedProduct = product === 'other' ? manualProduct : product;
+      const selectedIndustry = industry === 'other' ? manualIndustry : industry;
+      const selectedLocation = location === 'other' ? manualLocation : location;
+      const selectedCurrency = currency === 'other' ? manualCurrency : currency;
+      const selectedSkills = skills.includes('other') ? manualSkills.split(',').map(skill => skill.trim()) : skills;
+
+      // Fetch live market data
+      const currencyRates = await fetchCurrencyRates();
+      const currencyRate = currencyRates ? currencyRates[selectedCurrency] : 1;
+
+      // Fetch cost of living data
+      const costOfLivingData = await fetchCostOfLiving(selectedLocation);
+      const costOfLivingAdjustment = costOfLivingData ? costOfLivingData.cost_of_living_index / 100 : 1;
+
+      // Get base rate based on product and experience
+      const baseRate = productRates[product][experience];
+
+      // Apply industry adjustment
+      const industryRate = baseRate * (1 + (industryAdjustments[industry] || 0));
+
+      // Apply location adjustment
+      const locationRate = industryRate * (1 + (locationAdjustments[location] || 0));
+
+      // Apply skill adjustment
+      const skillAdjustment = selectedSkills.reduce((total, skill) => total * (skillAdjustments[skill] || 1), 1);
+
+      // Apply cost of living adjustment
+      const costAdjustedRate = locationRate * costOfLivingAdjustment;
+
+      // Apply skill adjustment
+      const skillAdjustedRate = costAdjustedRate * skillAdjustment;
+
+      // Apply complexity adjustment
+      let finalRate;
+      if (complexity === 'moderate') finalRate = skillAdjustedRate * 1.5;
+      else if (complexity === 'complex') finalRate = skillAdjustedRate * 2;
+      else finalRate = skillAdjustedRate;
+
+      // Apply timeframe adjustment
+      if (timeframe === 'rush') finalRate *= 1.2;
+
+      // Calculate rate range
+      const lowRate = finalRate * 0.8;
+      const highRate = finalRate * 1.2;
+
+      // Convert to selected currency
+      const lowRateConverted = lowRate * currencyRate;
+      const highRateConverted = highRate * currencyRate;
+
+      // Calculate project cost
+      const projectCost = finalRate * projectDuration * currencyRate;
+
+      // Display results
+      document.getElementById('rateRange').innerText = `${selectedCurrency} ${lowRateConverted.toFixed(2)} - ${selectedCurrency} ${highRateConverted.toFixed(2)} per hour`;
+      document.getElementById('rateExplanation').innerText = `Based on your inputs (${selectedProduct}, ${selectedIndustry}, ${experience}, ${complexity}, ${selectedLocation}) and live market data, we recommend this rate range.`;
+
+      // Compare with client budget
+      if (clientBudget) {
+        const budgetComparison = clientBudget >= lowRateConverted && clientBudget <= highRateConverted
+          ? "Your client's budget is within the recommended range."
+          : "Your client's budget is outside the recommended range.";
+        document.getElementById('clientBudgetComparison').innerText = budgetComparison;
+      }
+
+      // Display project cost
+      if (projectDuration) {
+        document.getElementById('projectCost').innerText = `Total Project Cost: ${selectedCurrency} ${projectCost.toFixed(2)}`;
+      }
+
+      document.getElementById('result').style.display = 'block';
+    }
+
+    function generateQuote() {
+      // Get user inputs
+      const product = document.getElementById('product').value;
+      const manualProduct = document.getElementById('manualProduct').value;
+      const industry = document.getElementById('industry').value;
+      const manualIndustry = document.getElementById('manualIndustry').value;
+      const location = document.getElementById('location').value;
+      const manualLocation = document.getElementById('manualLocation').value;
+      const experience = document.getElementById('experience').value;
+      const complexity = document.getElementById('complexity').value;
+      const timeframe = document.getElementById('timeframe').value;
+      const rateRange = document.getElementById('rateRange').innerText;
+
+      // Use manual inputs if "Other" is selected
+      const selectedProduct = product === 'other' ? manualProduct : product;
+      const selectedIndustry = industry === 'other' ? manualIndustry : industry;
+      const selectedLocation = location === 'other' ? manualLocation : location;
+
+      // Display quote details on the screen
+      document.getElementById('quoteProduct').innerText = selectedProduct;
+      document.getElementById('quoteIndustry').innerText = selectedIndustry;
+      document.getElementById('quoteExperience').innerText = experience;
+      document.getElementById('quoteComplexity').innerText = complexity;
+      document.getElementById('quoteLocation').innerText = selectedLocation;
+      document.getElementById('quoteTimeframe').innerText = timeframe;
+      document.getElementById('quoteRate').innerText = rateRange;
+
+      // Display dynamic terms and conditions
+      const termsList = document.getElementById('quoteTerms');
+      termsList.innerHTML = ''; // Clear previous terms
+      const terms = termsTemplates[selectedIndustry][selectedLocation][complexity] || termsTemplates[selectedIndustry].other[complexity];
+      terms.forEach(term => {
+        const li = document.createElement('li');
+        li.textContent = term;
+        termsList.appendChild(li);
+      });
+
+      document.getElementById('quoteDetails').style.display = 'block';
+
+      // Generate PDF quote
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF();
+
+      doc.setFontSize(18);
+      doc.text("Freelance Quote", 10, 20);
+      doc.setFontSize(12);
+      doc.text(`Product/Service: ${selectedProduct}`, 10, 30);
+      doc.text(`Industry/Niche: ${selectedIndustry}`, 10, 40);
+      doc.text(`Experience Level: ${experience}`, 10, 50);
+      doc.text(`Project Complexity: ${complexity}`, 10, 60);
+      doc.text(`Location: ${selectedLocation}`, 10, 70);
+      doc.text(`Timeframe: ${timeframe}`, 10, 80);
+      doc.text(`Recommended Rate: ${rateRange}`, 10, 90);
+      doc.text("Terms and Conditions:", 10, 100);
+      terms.forEach((term, index) => {
+        doc.text(`- ${term}`, 10, 110 + (index * 10));
+      });
+
+      doc.save("quote.pdf");
+    }
+  </script>
+</body>
+</html>
