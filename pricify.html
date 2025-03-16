@@ -87,6 +87,59 @@
       transition: border-color 0.3s ease, box-shadow 0.3s ease;
     }
 
+    /* Placeholder Text */
+    input::placeholder {
+      color: rgba(255, 255, 255, 0.7); /* Lighter placeholder text */
+    }
+
+    /* Dropdown Menu Styles */
+    select {
+      background-color: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
+      color: #fff; /* White text */
+      border: 2px solid rgba(255, 255, 255, 0.2); /* Light border */
+      border-radius: 10px; /* Rounded corners */
+      padding: 12px; /* Padding for better spacing */
+      font-size: 16px; /* Font size */
+      appearance: none; /* Remove default arrow */
+      -webkit-appearance: none; /* Remove default arrow for Safari */
+      -moz-appearance: none; /* Remove default arrow for Firefox */
+      cursor: pointer; /* Pointer cursor */
+    }
+
+    /* Dropdown Arrow */
+    select {
+      background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ffffff'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      background-size: 16px;
+    }
+
+    /* Dropdown Options */
+    select option {
+      background-color: #1f1c2c; /* Dark background for options */
+      color: #fff; /* White text for options */
+    }
+
+    /* Skills Dropdown Styling */
+    #skills {
+      background: linear-gradient(135deg, #1f1c2c, #928dab); /* Gradient background */
+      border: 2px solid rgba(255, 255, 255, 0.2); /* Light border */
+    }
+
+    #skills option {
+      padding: 10px; /* Add padding to options */
+      background: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
+      margin: 5px 0; /* Add spacing between options */
+      border-radius: 5px; /* Rounded corners */
+    }
+
+    /* Hover and Focus States */
+    select:hover, select:focus {
+      border-color: #3498db; /* Blue border on hover/focus */
+      outline: none; /* Remove default outline */
+      box-shadow: 0 0 10px rgba(52, 152, 219, 0.5); /* Glow effect */
+    }
+
     input:focus, select:focus {
       border-color: #3498db;
       outline: none;
