@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="AI-powered pricing and quote calculator for freelancers. Calculate your rates based on product, industry, experience, project complexity, and location.">
+  <meta name="keywords" content="freelance pricing, quote calculator, AI pricing tool, freelancer rates, pricing guide">
+  <meta name="author" content="Your Name or Company">
+  <title>Freelance Pricing & Quote Calculator</title>
+  <style>
+    /* Global Styles */
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #1f1c2c, #928dab);
+      color: #fff;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Header */
+    header {
+      background: rgba(44, 62, 80, 0.8);
+      backdrop-filter: blur(10px);
+      padding: 20px 0;
+      text-align: center;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+      font-weight: 700;
+      background: linear-gradient(90deg, #3498db, #8e44ad);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    header p {
+      margin: 10px 0 0;
+      font-size: 1.2rem;
+      color: #ecf0f1;
+    }
+
+    /* Navigation */
+    nav {
+      display: flex;
+      justify-content: center;
+      background: rgba(52, 73, 94, 0.8);
+      backdrop-filter: blur(10px);
+      padding: 10px;
+      position: sticky;
+      top: 80px;
+      z-index: 1000;
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      margin: 0 15px;
+      font-size: 1.1rem;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: #3498db;
+    }
+
+    /* Hero Section */
+    .hero {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 100px 20px;
+      text-align: center;
+      background: url('https://via.placeholder.com/1500x800') no-repeat center center/cover;
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 800px;
+    }
+
+    .hero h2 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      animation: fadeInUp 1.5s ease;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+      animation: fadeInUp 2s ease;
+    }
+
+    .hero .cta-button {
+      padding: 15px 30px;
+      background: linear-gradient(90deg, #3498db, #8e44ad);
+      color: #fff;
+      border: none;
+      border-radius: 50px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      animation: fadeInUp 2.5s ease;
+    }
+
+    .hero .cta-button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Features Section */
+    .features {
+      padding: 80px 20px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      text-align: center;
+      border-radius: 20px;
+      margin: 40px 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .features h2 {
+      font-size: 2.5rem;
+      margin-bottom: 40px;
+      background: linear-gradient(90deg, #8e44ad, #3498db);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .feature-cards {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+    }
+
+    .feature-card {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      padding: 30px;
+      border-radius: 20px;
+      width: 30%;
+      margin: 10px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .feature-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+      color: #fff;
+    }
+
+    .feature-card p {
+      font-size: 1rem;
+      color: #ecf0f1;
+    }
+
+    /* Testimonials Section */
+    .testimonials {
+      padding: 80px 20px;
+      background: rgba(44, 62, 80, 0.8);
+      backdrop-filter: blur(10px);
+      text-align: center;
+    }
+
+    .testimonials h2 {
+      font-size: 2.5rem;
+      margin-bottom: 40px;
+      background: linear-gradient(90deg, #8e44ad, #3498db);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .testimonial-cards {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+    }
+
+    .testimonial-card {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      padding: 30px;
+      border-radius: 20px;
+      width: 30%;
+      margin: 10px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .testimonial-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .testimonial-card p {
+      font-size: 1rem;
+      color: #ecf0f1;
+      margin-bottom: 15px;
+    }
+
+    .testimonial-card h4 {
+      font-size: 1.2rem;
+      color: #fff;
+      margin: 0;
+    }
+
+    /* Pricing Section */
+    .pricing {
+      padding: 80px 20px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      text-align: center;
+      border-radius: 20px;
+      margin: 40px 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .pricing h2 {
+      font-size: 2.5rem;
+      margin-bottom: 40px;
+      background: linear-gradient(90deg, #8e44ad, #3498db);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .pricing-cards {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+    }
+
+    .pricing-card {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      padding: 30px;
+      border-radius: 20px;
+      width: 30%;
+      margin: 10px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .pricing-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .pricing-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+      color: #fff;
+    }
+
+    .pricing-card p {
+      font-size: 1rem;
+      color: #ecf0f1;
+    }
+
+    .pricing-card .price {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #3498db;
+      margin: 20px 0;
+    }
+
+    .pricing-card ul {
+      list-style: none;
+      padding: 0;
+      margin: 20px 0;
+    }
+
+    .pricing-card ul li {
+      font-size: 1rem;
+      color: #ecf0f1;
+      margin: 10px 0;
+    }
+
+    .pricing-card button {
+      padding: 10px 20px;
+      background: linear-gradient(90deg, #3498db, #8e44ad);
+      color: #fff;
+      border: none;
+      border-radius: 50px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .pricing-card button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Client Logos Section */
+    .clients {
+      padding: 80px 20px;
+      background: rgba(44, 62, 80, 0.8);
+      backdrop-filter: blur(10px);
+      text-align: center;
+    }
+
+    .clients h2 {
+      font-size: 2.5rem;
+      margin-bottom: 40px;
+      background: linear-gradient(90deg, #8e44ad, #3498db);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .client-logos {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+    }
+
+    .client-logos img {
+      width: 150px;
+      margin: 20px;
+      filter: grayscale(100%);
+      transition: filter 0.3s ease;
+    }
+
+    .client-logos img:hover {
+      filter: grayscale(0%);
+    }
+
+    /* Stats Section */
+    .stats {
+      padding: 80px 20px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      text-align: center;
+      border-radius: 20px;
+      margin: 40px 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .stats h2 {
+      font-size: 2.5rem;
+      margin-bottom: 40px;
+      background: linear-gradient(90deg, #8e44ad, #3498db);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .stats-cards {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+    }
+
+    .stats-card {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      padding: 30px;
+      border-radius: 20px;
+      width: 30%;
+      margin: 10px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .stats-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .stats-card h3 {
+      font-size: 2rem;
+      margin-bottom: 15px;
+      color: #fff;
+    }
+
+    .stats-card p {
+      font-size: 1rem;
+      color: #ecf0f1;
+    }
+
+    /* FAQ Section */
+    .faq {
+      padding: 80px 20px;
+      background: rgba(44, 62, 80, 0.8);
+      backdrop-filter: blur(10px);
+      text-align: center;
+    }
+
+    .faq h2 {
+      font-size: 2.5rem;
+      margin-bottom: 40px;
+      background: linear-gradient(90deg, #8e44ad, #3498db);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .faq-cards {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+    }
+
+    .faq-card {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      padding: 30px;
+      border-radius: 20px;
+      width: 30%;
+      margin: 10px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .faq-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .faq-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+      color: #fff;
+    }
+
+    .faq-card p {
+      font-size: 1rem;
+      color: #ecf0f1;
+    }
+
+    /* Newsletter Section */
+    .newsletter {
+      padding: 80px 20px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      text-align: center;
+      border-radius: 20px;
+      margin: 40px 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .newsletter h2 {
+      font-size: 2.5rem;
+      margin-bottom: 40px;
+      background: linear-gradient(90deg, #8e44ad, #3498db);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .newsletter form {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .newsletter input {
+      padding: 15px;
+      border: 2px solid #ddd;
+      border-radius: 50px;
+      font-size: 1rem;
+      margin-right: 10px;
+      width: 300px;
+      max-width: 100%;
+    }
+
+    .newsletter button {
+      padding: 15px 30px;
+      background: linear-gradient(90deg, #3498db, #8e44ad);
+      color: #fff;
+      border: none;
+      border-radius: 50px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .newsletter button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Footer */
+    footer {
+      background: rgba(44, 62, 80, 0.8);
+      backdrop-filter: blur(10px);
+      color: #fff;
+      text-align: center;
+      padding: 20px 0;
+      margin-top: 40px;
+    }
+
+    footer p {
+      margin: 0;
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .feature-card, .testimonial-card, .pricing-card, .stats-card, .faq-card {
+        width: 45%;
+      }
+    }
+
+    @media (max-width: 480px) {
+      header h1 {
+        font-size: 2rem;
+      }
+
+      .hero h2 {
+        font-size: 2rem;
+      }
+
+      .feature-card, .testimonial-card, .pricing-card, .stats-card, .faq-card {
+        width: 100%;
+      }
+    }
+  </style>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <h1>Freelance Pricing & Quote Calculator</h1>
+    <p>AI-powered tools to help freelancers calculate rates and generate quotes.</p>
+  </header>
+
+  <!-- Navigation -->
+  <nav>
+    <a href="#features">Features</a>
+    <a href="#calculator">Calculator</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h2>Calculate Your Freelance Rates with AI</h2>
+      <p>Get accurate pricing and quotes tailored to your skills, industry, and location.</p>
+      <a href="pricify.html" style="text-decoration: none;">
+        <button class="cta-button">Try It Now</button>
+      </a>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section id="features" class="features">
+    <h2>Why Choose Us?</h2>
+    <div class="feature-cards">
+      <div class="feature-card">
+        <h3>AI-Powered Accuracy</h3>
+        <p>Our advanced algorithms ensure precise rate calculations based on real-time data.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Customizable Quotes</h3>
+        <p>Generate professional quotes tailored to your client's needs.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Global Coverage</h3>
+        <p>Supports multiple currencies and locations worldwide.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="testimonials">
+    <h2>What Our Users Say</h2>
+    <div class="testimonial-cards">
+      <div class="testimonial-card">
+        <p>"This tool has completely transformed how I price my freelance projects. Highly recommended!"</p>
+        <h4>- John Doe</h4>
+      </div>
+      <div class="testimonial-card">
+        <p>"The AI-powered insights are incredibly accurate. It's like having a pricing expert in my pocket!"</p>
+        <h4>- Jane Smith</h4>
+      </div>
+      <div class="testimonial-card">
+        <p>"I love how easy it is to generate professional quotes. It saves me so much time!"</p>
+        <h4>- Mike Johnson</h4>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing Section -->
+  <section class="pricing">
+    <h2>Pricing Plans</h2>
+    <div class="pricing-cards">
+      <div class="pricing-card">
+        <h3>Basic</h3>
+        <p class="price">$10/month</p>
+        <ul>
+          <li>AI-Powered Pricing</li>
+          <li>Custom Quotes</li>
+          <li>Email Support</li>
+        </ul>
+        <button>Get Started</button>
+      </div>
+      <div class="pricing-card">
+        <h3>Pro</h3>
+        <p class="price">$25/month</p>
+        <ul>
+          <li>Everything in Basic</li>
+          <li>Advanced Analytics</li>
+          <li>Priority Support</li>
+        </ul>
+        <button>Get Started</button>
+      </div>
+      <div class="pricing-card">
+        <h3>Enterprise</h3>
+        <p class="price">$50/month</p>
+        <ul>
+          <li>Everything in Pro</li>
+          <li>Dedicated Account Manager</li>
+          <li>Custom Integrations</li>
+        </ul>
+        <button>Get Started</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Client Logos Section -->
+  <section class="clients">
+    <h2>Trusted By</h2>
+    <div class="client-logos">
+      <img src="https://via.placeholder.com/150" alt="Client 1">
+      <img src="https://via.placeholder.com/150" alt="Client 2">
+      <img src="https://via.placeholder.com/150" alt="Client 3">
+      <img src="https://via.placeholder.com/150" alt="Client 4">
+    </div>
+  </section>
+
+  <!-- Stats Section -->
+  <section class="stats">
+    <h2>Our Impact</h2>
+    <div class="stats-cards">
+      <div class="stats-card">
+        <h3>10,000+</h3>
+        <p>Freelancers Trust Us</p>
+      </div>
+      <div class="stats-card">
+        <h3>95%</h3>
+        <p>Accuracy Rate</p>
+      </div>
+      <div class="stats-card">
+        <h3>24/7</h3>
+        <p>Support Available</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="faq">
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq-cards">
+      <div class="faq-card">
+        <h3>How does it work?</h3>
+        <p>Our AI analyzes your inputs and provides accurate pricing based on industry standards and real-time data.</p>
+      </div>
+      <div class="faq-card">
+        <h3>Is my data secure?</h3>
+        <p>Yes, we use advanced encryption to ensure your data is safe and secure.</p>
+      </div>
+      <div class="faq-card">
+        <h3>Can I cancel anytime?</h3>
+        <p>Absolutely! You can cancel your subscription at any time with no hidden fees.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter Section -->
+  <section class="newsletter">
+    <h2>Subscribe to Our Newsletter</h2>
+    <form>
+      <input type="email" placeholder="Enter your email" required>
+      <button type="submit">Subscribe</button>
+    </form>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2023 Freelance Pricing Calculator. All rights reserved.</p>
+  </footer>
+</body>
+</html>
